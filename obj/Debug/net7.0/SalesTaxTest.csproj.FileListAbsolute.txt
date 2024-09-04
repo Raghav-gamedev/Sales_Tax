@@ -1,0 +1,15 @@
+C:\Users\Raghav\Desktop\SalesTaxTest\bin\Debug\net7.0\SalesTaxTest.exe
+C:\Users\Raghav\Desktop\SalesTaxTest\bin\Debug\net7.0\SalesTaxTest.deps.json
+C:\Users\Raghav\Desktop\SalesTaxTest\bin\Debug\net7.0\SalesTaxTest.runtimeconfig.json
+C:\Users\Raghav\Desktop\SalesTaxTest\bin\Debug\net7.0\SalesTaxTest.dll
+C:\Users\Raghav\Desktop\SalesTaxTest\bin\Debug\net7.0\SalesTaxTest.pdb
+C:\Users\Raghav\Desktop\SalesTaxTest\obj\Debug\net7.0\SalesTaxTest.csproj.AssemblyReference.cache
+C:\Users\Raghav\Desktop\SalesTaxTest\obj\Debug\net7.0\SalesTaxTest.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Raghav\Desktop\SalesTaxTest\obj\Debug\net7.0\SalesTaxTest.AssemblyInfoInputs.cache
+C:\Users\Raghav\Desktop\SalesTaxTest\obj\Debug\net7.0\SalesTaxTest.AssemblyInfo.cs
+C:\Users\Raghav\Desktop\SalesTaxTest\obj\Debug\net7.0\SalesTaxTest.csproj.CoreCompileInputs.cache
+C:\Users\Raghav\Desktop\SalesTaxTest\obj\Debug\net7.0\SalesTaxTest.dll
+C:\Users\Raghav\Desktop\SalesTaxTest\obj\Debug\net7.0\refint\SalesTaxTest.dll
+C:\Users\Raghav\Desktop\SalesTaxTest\obj\Debug\net7.0\SalesTaxTest.pdb
+C:\Users\Raghav\Desktop\SalesTaxTest\obj\Debug\net7.0\SalesTaxTest.genruntimeconfig.cache
+C:\Users\Raghav\Desktop\SalesTaxTest\obj\Debug\net7.0\ref\SalesTaxTest.dll
