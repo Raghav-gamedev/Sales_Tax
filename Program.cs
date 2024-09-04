@@ -158,7 +158,7 @@ namespace SalesTaxApp
                 string name = GetValidStringInput("Name:");
                 int quantity = GetValidIntegerInput("Quantity:", minValue: 1);
                 decimal price = GetValidDecimalInput("Price:", minValue: 0);
-                bool isImported = GetValidBooleanInput("is the product category one of the following: (book, food, medical, other)? (yes/no):");
+                bool isImported = GetValidBooleanInput("is the product category one of the following: (book, food, medical)? (yes/no):");
                 bool isExempt = GetValidBooleanInput("Is the product exempt from basic sales tax? (yes/no):");
 
                 cart.AddProduct(new Product(name, quantity, price, isImported, isExempt));

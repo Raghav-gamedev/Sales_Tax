@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Raghav\\Desktop\\SalesTaxTest\\SalesTaxTest.csproj",
+      "projectUniqueName": "C:\\Users\\Raghav\\Desktop\\SalesTaxTest\\Sales_Tax\\SalesTaxTest.csproj",
       "projectName": "SalesTaxTest",
-      "projectPath": "C:\\Users\\Raghav\\Desktop\\SalesTaxTest\\SalesTaxTest.csproj",
+      "projectPath": "C:\\Users\\Raghav\\Desktop\\SalesTaxTest\\Sales_Tax\\SalesTaxTest.csproj",
       "packagesPath": "C:\\Users\\Raghav\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Raghav\\Desktop\\SalesTaxTest\\obj\\",
+      "outputPath": "C:\\Users\\Raghav\\Desktop\\SalesTaxTest\\Sales_Tax\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Raghav\\AppData\\Roaming\\NuGet\\NuGet.Config"
