@@ -172,11 +172,10 @@ namespace SalesTaxApp
                 {
                     if (match.Success)
                     {
-                        int quantity = int.Parse(match.Groups[1].Value);
-                        string name = match.Groups[2].Value.Trim();
-                        decimal price = decimal.Parse(match.Groups[3].Value);
-
-                        bool isImported = name.Contains("imported", StringComparison.OrdinalIgnoreCase);
+                        int quantity = ParseQuantity(match);
+                        string name = ExtractProductName(match);
+                        decimal price = ParsePrice(match);
+                        bool isImported = IsImported(name);
                         bool isTaxable = IsSalesTaxExemptable(name);
 
                         Product product = new Product(name, quantity, price, isImported, isTaxable);
@@ -195,6 +194,7 @@ namespace SalesTaxApp
             }
         }
 
+
         private static bool IsSalesTaxExemptable(string productName)
         {
             string[] taxableKeywords = { "chocolate", "book", "pills" };
@@ -207,6 +207,13 @@ namespace SalesTaxApp
             }
             return false;
         }
+        private static bool IsImported(string name) => name.Contains("imported", StringComparison.OrdinalIgnoreCase);
+        
+        private static decimal ParsePrice(Match match) => decimal.Parse(match.Groups[3].Value);
+
+        private static string ExtractProductName(Match match) => match.Groups[2].Value.Trim();
+
+        private static int ParseQuantity(Match match) => int.Parse(match.Groups[1].Value);
 
     }
 }
