@@ -1,4 +1,5 @@
 ﻿
+
 using System.Text.RegularExpressions;
 
 namespace SalesTaxApp
@@ -73,6 +74,15 @@ namespace SalesTaxApp
             decimal tax = TaxCalculator.CalculateTax(product);
             items.Add(new ReceiptItem(product, tax));
         }
+        public void  AddProducts(List<Product> products)
+        {   
+            foreach (var product in products)
+            {
+                decimal tax = TaxCalculator.CalculateTax(product);
+                items.Add(new ReceiptItem(product, tax));
+            }
+            
+        }
 
         public Receipt GenerateReceipt()
         {
@@ -81,7 +91,7 @@ namespace SalesTaxApp
     }
 
     public class Receipt
-    {
+    {   
         private List<ReceiptItem> items;
         public decimal TotalTaxes { get; private set; }
         public decimal TotalPrice { get; private set; }
@@ -113,14 +123,14 @@ namespace SalesTaxApp
     }
 
 
-    class Program
+    class SalesTaxProcessor
     {
         static void Main(string[] args)
         {
 
             while (true)
             {
-                Console.WriteLine("Enter Your Inputs:");
+                Console.WriteLine("\nEnter Your Inputs:");
                 string userInput = Console.ReadLine();
 
                 if (string.IsNullOrEmpty(userInput))
@@ -131,8 +141,7 @@ namespace SalesTaxApp
 
                 try
                 {
-                    var cart = new ShoppingCart();
-                    ProcessUserInput(userInput, cart);
+                    ShoppingCart cart =  DataProcessor.CreateShoppingCartFromInput(userInput);
                     var receipt = cart.GenerateReceipt();
                     receipt.PrintReceipt();
                 }
@@ -143,31 +152,50 @@ namespace SalesTaxApp
             }
 
         }
+    }
 
-        private static void ProcessUserInput(string input, ShoppingCart cart)
-        {
-            string pattern = @"(\d+) ([\w\s]+) at (\d+\.\d+)";
-            Regex regex = new Regex(pattern, RegexOptions.IgnoreCase);
-            MatchCollection matches = regex.Matches(input);
 
-            foreach (Match match in matches)
+    public class DataProcessor
+    {
+        private const string InputPattern = @"(\d+) ([\w\s]+) at (\d+\.\d+)";
+        public static ShoppingCart CreateShoppingCartFromInput(string input)
+        {   
+            try
             {
-                if (match.Success)
+
+                Regex regex = new Regex(InputPattern, RegexOptions.IgnoreCase);
+                MatchCollection matches = regex.Matches(input);
+                List<Product> products = new List<Product>();
+
+
+                foreach (Match match in matches)
                 {
-                    int quantity = int.Parse(match.Groups[1].Value);
-                    string name = match.Groups[2].Value.Trim();
-                    decimal price = decimal.Parse(match.Groups[3].Value);
+                    if (match.Success)
+                    {
+                        int quantity = int.Parse(match.Groups[1].Value);
+                        string name = match.Groups[2].Value.Trim();
+                        decimal price = decimal.Parse(match.Groups[3].Value);
 
-                    bool isImported = name.Contains("imported", StringComparison.OrdinalIgnoreCase);
-                    bool isTaxable = IsTaxable(name);
+                        bool isImported = name.Contains("imported", StringComparison.OrdinalIgnoreCase);
+                        bool isTaxable = IsSalesTaxExemptable(name);
 
-                    Product product = new Product(name, quantity, price, isImported, isTaxable);
-                    cart.AddProduct(product);
+                        Product product = new Product(name, quantity, price, isImported, isTaxable);
+                        products.Add(product);
+                    }
                 }
+
+                ShoppingCart shoppingCart = new ShoppingCart() ;
+                shoppingCart.AddProducts(products);
+                return shoppingCart;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"An error occurred: {ex.Message}");
+                return null;
             }
         }
 
-        private static bool IsTaxable(string productName)
+        private static bool IsSalesTaxExemptable(string productName)
         {
             string[] taxableKeywords = { "chocolate", "book", "pills" };
             foreach (var keyword in taxableKeywords)
@@ -179,7 +207,6 @@ namespace SalesTaxApp
             }
             return false;
         }
-
 
     }
 }
