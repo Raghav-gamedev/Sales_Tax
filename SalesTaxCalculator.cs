@@ -1,10 +1,10 @@
-﻿
+
 
 using System.Text.RegularExpressions;
 
 namespace SalesTaxApp
 {
-
+    
     public class Product
     {
         public string Name { get; private set; }
@@ -28,7 +28,9 @@ namespace SalesTaxApp
     {
         private const decimal BasicTaxRate = 0.10m;
         private const decimal ImportDutyRate = 0.05m;
-
+        
+        // Calculates total tax for a single product,
+        // applying basic sales tax and import duty if applicable
         public static decimal CalculateTax(Product product)
         {
             decimal tax = 0m;
@@ -45,7 +47,8 @@ namespace SalesTaxApp
 
             return RoundUpToNearestFiveCents(tax);
         }
-
+        
+        // Rounds tax up to the nearest 0.05 as per sales tax rules
         private static decimal RoundUpToNearestFiveCents(decimal amount)
         {
             return Math.Ceiling(amount * 20) / 20;
@@ -56,6 +59,8 @@ namespace SalesTaxApp
     {
         public Product Product { get; private set; }
         public decimal Tax { get; private set; }
+        
+        // Total price including tax, multiplied by quantity
         public decimal TotalPrice => Product.Quantity * (Product.Price + Tax);
 
         public ReceiptItem(Product product, decimal tax)
@@ -93,7 +98,11 @@ namespace SalesTaxApp
     public class Receipt
     {   
         private List<ReceiptItem> items;
+        
+        // Tax is multiplied by quantity
         public decimal TotalTaxes { get; private set; }
+        
+        // Total price already includes quantity
         public decimal TotalPrice { get; private set; }
 
         public Receipt(List<ReceiptItem> items)
@@ -127,7 +136,8 @@ namespace SalesTaxApp
     {
         static void Main(string[] args)
         {
-
+            
+            // Continuously accepts user input until the application is terminated manually
             while (true)
             {
                 Console.WriteLine("\nEnter Your Inputs:");
@@ -156,8 +166,11 @@ namespace SalesTaxApp
 
 
     public class DataProcessor
-    {
+    {   
+        // Matches input format: "<quantity> <product name> at <price>"
+        // Example: "1 imported bottle of perfume at 27.99"
         private const string InputPattern = @"(\d+) ([\w\s]+) at (\d+\.\d+)";
+        
         public static ShoppingCart CreateShoppingCartFromInput(string input)
         {   
             try
@@ -196,8 +209,10 @@ namespace SalesTaxApp
 
 
         private static bool IsSalesTaxExemptable(string productName)
-        {
-            string[] taxableKeywords = { "chocolate", "book", "pills" };
+        {   
+            
+            string[] taxableKeywords = { "chocolate", "book", "pills" };  // actually tax-exempt items
+            
             foreach (var keyword in taxableKeywords)
             {
                 if (productName.IndexOf(keyword, StringComparison.OrdinalIgnoreCase) >= 0)
